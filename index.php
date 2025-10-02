@@ -127,7 +127,7 @@ $oil_cost = htmlspecialchars($user_data['oil_cost']);
       <div style="background-color: antiquewhite;" class="cancelRate">Cancel Rate:
         <span id="cancelRate"></span>%
       </div>
-      <div style="background-color: antiquewhite;" class="rescheduledRate">Rescheduled Rate:
+      <div title="Rescheduled Rate" style="background-color: antiquewhite;" class="rescheduledRate">Rescheduled:
         <span id="rescheduledRate"></span>%
       </div>
 
