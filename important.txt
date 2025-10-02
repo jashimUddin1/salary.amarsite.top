@@ -1,0 +1,6 @@
+local server
+
+$host = "127.0.0.1";
+$dbUser = "root";
+$dbPwd = "";
+$dbName  = "amarsite_salary_v-2.02";
