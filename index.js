@@ -125,6 +125,10 @@ function updateSummary(summary, totalDays, basicSalary, month_day,oil_cost) {
   const returnRate = (returnTotal / receivedTotal) * 100;
   const deliveredRate = 100 - returnRate;
 
+  // new add version 2.09
+  const cancelRate = (cancelTotal / receivedTotal) * 100;
+  const rescheduledRate = (rescheduledTotal / receivedTotal) * 100;
+
   const possibleWorkDay = month_day - 4 ;
   const workDay = totalDays - holidayCount - absentCount;
   let totalWorkDay = possibleWorkDay - absentCount;
@@ -168,6 +172,8 @@ function updateSummary(summary, totalDays, basicSalary, month_day,oil_cost) {
       updateText("returnTotal", returnTotal);
       updateText("returnRate", returnRate.toFixed(1));
       updateText("dlvrdRate", deliveredRate.toFixed(1));
+      updateText("cancelRate", cancelRate.toFixed(1));         // 👈 নতুন
+      updateText("rescheduledRate", rescheduledRate.toFixed(1)); // 👈 নতুন
       updateText("totalDay", totalDays);
       updateText("offDay", holidayCount);
       updateText("absent", absentCount);
@@ -197,8 +203,37 @@ function updateSummary(summary, totalDays, basicSalary, month_day,oil_cost) {
   if (lowestDeliveredRow) lowestDeliveredRow.style.backgroundColor = "royalblue";
 }
 
+  // সব টেক্সট আপডেট হয়ে যাওয়ার পর রঙ বসানো
+  setTimeout(() => {
+    const rateItems = [
+      { id: "dlvrdRate", containerClass: "deliverdRate", condition: (val) => val >= 90 },
+      { id: "returnRate", containerClass: "returnRate", condition: (val) => val <= 10 }, // Return Rate কম হলে ভালো
+      { id: "cancelRate", containerClass: "cancelRate", condition: (val) => val <= 5 }, // Cancel Rate কম হলে ভালো
+      { id: "rescheduledRate", containerClass: "rescheduledRate", condition: (val) => val <= 5 } // Reschedule Rate কম হলে ভালো
+    ];
+
+    rateItems.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        const val = parseFloat(el.textContent);
+        const container = el.closest("div"); // পুরো div ধরা
+        if (!isNaN(val) && container) {
+          if (item.condition(val)) {
+            container.style.color = "green";
+            container.style.fontWeight = "bold";
+          } else {
+            container.style.color = "red";
+            container.style.fontWeight = "bold";
+          }
+        }
+      }
+    });
+  }, 100);
+
 
 function updateText(id, value) {
   const el = document.getElementById(id);
   if (el) el.innerHTML = value;
 }
+
+

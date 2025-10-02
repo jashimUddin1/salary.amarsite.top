@@ -1,1 +1,0 @@
-nrew q ok or not? 

@@ -122,8 +122,8 @@
                     </form>
                     
                     <div class="d-flex justify-content-between">
-                        <h5>Current Version: <span style='color:green'>version-2.05_updated</span> </h5>  
-                        <h4>Last Updated: <span style='color:green'>1 July 2025</span> </h4>
+                        <h5>Current Version: <span style='color:green'>version-2.06_updated</span> </h5>  
+                        <h4>Last Updated: <span style='color:green'>2 October 2025</span> </h4>
                     </div>
                 </div>
             </div>
